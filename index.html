@@ -65,10 +65,9 @@
     <button type="submit">Сохранить</button>
 </form>
 
-<script>
+<script src="https://telegram.org/js/telegram-web-app.js">
     document.getElementById('expensesForm').addEventListener('submit', function(event) {
         event.preventDefault(); 
-
         document.getElementById('amountError').textContent = '';
         document.getElementById('categoryError').textContent = '';
         
@@ -99,11 +98,15 @@
                 category: category,
                 comment: comment
             };
+            // Отправка данных в Telegram-бота
+            Telegram.WebApp.sendData(JSON.stringify(formData));
 
-            console.log('Данные формы:', formData);
-            // Здесь вы можете отправить данные на сервер с помощью fetch или XMLHttpRequest
+            // Вывод сообщения об успешной отправке
+            alert('Данные успешно отправлены в бота!');
+            // Очистка формы
+            document.getElementById('expensesForm').reset();
         }
-    });
+        });
 </script>
 
 </body>
